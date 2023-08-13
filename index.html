@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Move Box Left and Right</title>
+   <style>
+    /* Styling for the box */
+    #box {
+        height: 200px;
+        width: 200px;
+        background-color: yellow;
+        border: 3px solid black;
+        position: relative;
+        margin: auto;
+        transition: left 0.3s, right 0.3s; /* Adding transitions for smooth movement */
+    }
+   </style>
+</head>
+<body>
+<div id="box"></div> <!-- The box that will be moved -->
+<button onclick="moveBox('left')">Move Left</button> <!-- Button to move the box left -->
+<button onclick="moveBox('right')">Move Right</button> <!-- Button to move the box right -->
+</body>
+<script>
+// JavaScript code for moving the box
+let isMovingLeft = false;                                // A variable to track if the box is currently moving left
+
+function moveBox(direction) {
+    const box = document.getElementById('box');                 // Get the box element
+    const currentLeft = parseFloat(box.style.left) || 0;           // Get the current left position of the box
+    const currentRight = parseFloat(box.style.right) || 0;            // Get the current right position of the box
+    let moveAmount = 10;                       // The amount by which the box will move (you can change this value)
+    
+    if (isMovingLeft) {
+        moveAmount *= -1;                              // Reverse the movement direction if already moving left
+    }
+    
+    if (direction === 'left') {
+        box.style.left = `${currentLeft + moveAmount}%`;     // Move the box to the left by adding to the left value
+        box.style.right = "";                                    // Reset the right value
+        isMovingLeft = true;                                // Remember that the box is moving left now
+    } else if (direction === 'right') {
+        box.style.right = `${currentRight - moveAmount}%`; //Move the box to the right by subtracting from the right value
+        box.style.left = "";                                      // Reset the left value
+        isMovingLeft = false;                                     // Remember that the box is moving right now
+    }
+}
+</script>
+</html>
